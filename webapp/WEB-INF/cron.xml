@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Symphony - A modern community (forum/SNS/blog) platform written in Java.
+    Copyright (C) 2012-2017,  b3log.org & hacpai.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--
+    Description: Cron job configurations. 
+    Version: 1.11.0.7, Dec 18, 2016
+    Author: Liang Ding
+-->
+<cronentries>
+
+    <cron>
+        <url>/cron/users/load-names?key=dev_key</url>
+        <description>Loads usernames</description>
+        <schedule>every 30 minutes</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/article/stick-expire?key=dev_key</url>
+        <description>Expire sticked article</description>
+        <schedule>every 1 minutes</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/tag/cache-tags?key=dev_key</url>
+        <description>Cache tags</description>
+        <schedule>every 30 minutes</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/domain/cache-domains?key=dev_key</url>
+        <description>Cache domains</description>
+        <schedule>every 6 hours</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/stat?key=dev_key</url>
+        <description>Load statistic data</description>
+        <schedule>every 30 minutes</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/xiaov?key=dev_key</url>
+        <description>XiaoV replies Stm.</description>
+        <schedule>every 5 seconds</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/invitecode-expire?key=dev_key</url>
+        <description>Expire invitecode</description>
+        <schedule>every 6 minutes</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/mail/weekly?key=dev_key</url>
+        <description>Send weekly newsletter</description>
+        <schedule>every 5 minutes</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/status?key=dev_key</url>
+        <description>Checks running status</description>
+        <schedule>every 2 hours</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/verifycode/email?key=dev_key</url>
+        <description>Sends email verifycodes</description>
+        <schedule>every 5 seconds</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/verifycode/remove-expired?key=dev_key</url>
+        <description>Removes expired verifycodes</description>
+        <schedule>every 1 hours</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/users/reset-unverified?key=dev_key</url>
+        <description>Resets unverified users</description>
+        <schedule>every 24 hours</schedule>
+    </cron>
+
+    <cron>
+        <url>/cron/forge/link/purge?key=dev_key</url>
+        <description>Purges link forge</description>
+        <schedule>every 7 hours</schedule>
+    </cron>
+
+</cronentries>
