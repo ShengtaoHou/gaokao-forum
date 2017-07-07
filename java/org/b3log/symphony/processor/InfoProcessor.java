@@ -29,8 +29,7 @@ import org.b3log.symphony.model.Common;
 import org.b3log.symphony.model.Permission;
 import org.b3log.symphony.model.UserExt;
 import org.b3log.symphony.model.Verifycode;
-import org.b3log.symphony.processor.advice.AnonymousViewCheck;
-import org.b3log.symphony.processor.advice.PermissionGrant;
+import org.b3log.symphony.processor.advice.*;
 import org.b3log.symphony.processor.advice.stopwatch.StopwatchEndAdvice;
 import org.b3log.symphony.processor.advice.stopwatch.StopwatchStartAdvice;
 import org.b3log.symphony.processor.advice.validate.UserRegisterValidation;
@@ -44,6 +43,48 @@ import org.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+import org.b3log.latke.util.Requests;
+//
+import com.qiniu.util.Auth;
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.b3log.latke.Keys;
+import org.b3log.latke.Latkes;
+import org.b3log.latke.ioc.inject.Inject;
+import org.b3log.latke.logging.Level;
+import org.b3log.latke.logging.Logger;
+import org.b3log.latke.model.User;
+import org.b3log.latke.service.LangPropsService;
+import org.b3log.latke.service.ServiceException;
+import org.b3log.latke.servlet.HTTPRequestContext;
+import org.b3log.latke.servlet.HTTPRequestMethod;
+import org.b3log.latke.servlet.annotation.After;
+import org.b3log.latke.servlet.annotation.Before;
+import org.b3log.latke.servlet.annotation.RequestProcessing;
+import org.b3log.latke.servlet.annotation.RequestProcessor;
+import org.b3log.latke.servlet.renderer.freemarker.AbstractFreeMarkerRenderer;
+import org.b3log.latke.util.Locales;
+import org.b3log.latke.util.Requests;
+import org.b3log.latke.util.Strings;
+import org.b3log.symphony.model.*;
+import org.b3log.symphony.processor.advice.PermissionGrant;
+import org.b3log.symphony.processor.advice.stopwatch.StopwatchEndAdvice;
+import org.b3log.symphony.processor.advice.stopwatch.StopwatchStartAdvice;
+import org.b3log.symphony.processor.advice.validate.UserForgetPwdValidation;
+import org.b3log.symphony.processor.advice.validate.UserRegister2Validation;
+import org.b3log.symphony.processor.advice.validate.UserRegisterValidation;
+import org.b3log.symphony.service.*;
+import org.b3log.symphony.util.Sessions;
+import org.b3log.symphony.util.Symphonys;
+import org.json.JSONObject;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Top ranking list processor.
@@ -84,6 +125,20 @@ public class InfoProcessor {
      */
     @Inject
     private SchoolQueryService schoolQueryService;
+
+    /**
+     * Option query service.
+     */
+    @Inject
+    private OptionQueryService optionQueryService;
+
+    /**
+     * Option management service.
+     */
+    @Inject
+    private OptionMgmtService optionMgmtService;
+
+
     /**
      * Shows balance ranking list.
      *
@@ -103,13 +158,20 @@ public class InfoProcessor {
 
         renderer.setTemplateName("/info/college.ftl");
 
+//        final JSONObject requestJSONObject = Requests.parseRequestJSONObject(request, response);
+//        final String schoolname = requestJSONObject.optString("schoolname");
+//        System.out.println("sc1"+schoolname);
+
         final Map<String, Object> dataModel = renderer.getDataModel();
 
         final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);
 
-        final List<JSONObject> users = pointtransferQueryService.getTopBalanceUsers(
-                avatarViewMode, Symphonys.getInt("topBalanceCnt"));
-        dataModel.put(Common.TOP_BALANCE_USERS, users);
+       // final List<JSONObject> users = pointtransferQueryService.getTopBalanceUsers(
+                //avatarViewMode, Symphonys.getInt("topBalanceCnt"));
+        //dataModel.put(Common.TOP_BALANCE_USERS, users);
+
+        //final List<JSONObject> misc = optionQueryService.getMisc();//
+        //dataModel.put(Option.OPTIONS, misc);//
 
         dataModelService.fillHeaderAndFooter(request, response, dataModel);
         dataModelService.fillRandomArticles(avatarViewMode, dataModel);
@@ -117,29 +179,57 @@ public class InfoProcessor {
         dataModelService.fillSideTags(dataModel);
         dataModelService.fillLatestCmts(dataModel);
     }
-    //*****for debug
-    private void showParams(HttpServletRequest request) {
-        Map map = new HashMap();
-        Enumeration paramNames = request.getParameterNames();
-        while (paramNames.hasMoreElements()) {
-            String paramName = (String) paramNames.nextElement();
+    @RequestProcessing(value = "/info/college", method = HTTPRequestMethod.POST)
+    @Before(adviceClass = {StopwatchStartAdvice.class, PermissionCheck.class})
+    @After(adviceClass = {PermissionGrant.class, StopwatchEndAdvice.class})
+    public void updateMisc(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
+            throws Exception {
+        final AbstractFreeMarkerRenderer renderer = new SkinRenderer(request);
+        context.setRenderer(renderer);
+        renderer.setTemplateName("info/college.ftl");
+        final Map<String, Object> dataModel = renderer.getDataModel();
 
-            String[] paramValues = request.getParameterValues(paramName);
-            if (paramValues.length == 1) {
-                String paramValue = paramValues[0];
-                if (paramValue.length() != 0) {
-                    map.put(paramName, paramValue);
-                }
-            }
+        //List<JSONObject> misc = new ArrayList<>();
+
+        final Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            final String name = parameterNames.nextElement();
+            final String value = request.getParameter(name);
+            System.out.println("infoprocessor update name "+name);
+            System.out.println("infoprocessor update value "+value);
+            //final JSONObject option = new JSONObject();
+            //option.put(Keys.OBJECT_ID, name);
+           //option.put(Option.OPTION_VALUE, value);
+            //option.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_MISC);
+
+            //misc.add(option);
+        }
+/*
+        for (final JSONObject option : misc) {
+            optionMgmtService.updateOption(option.getString(Keys.OBJECT_ID), option);
         }
 
-        Set<Map.Entry<String, String>> set = map.entrySet();
-        System.out.println("------------------------------");
-        for (Map.Entry entry : set) {
-            System.out.println(entry.getKey() + ":" + entry.getValue());
-        }
-        System.out.println("------------------------------");
+        misc = optionQueryService.getMisc();
+        dataModel.put(Option.OPTIONS, misc);
+*/
+        final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);//
+        System.out.println("infoprocessor update");//
+
+        final String schoolname = request.getParameter("schoolname");
+        final List<JSONObject> schools = schoolQueryService.getSchoolByName(schoolname);
+        System.out.println("success"+schoolname);
+
+        dataModel.put(Common.TOP_SCHOOL, schools);
+
+        dataModelService.fillHeaderAndFooter(request, response, dataModel);
+
+        dataModelService.fillRandomArticles(avatarViewMode, dataModel);//
+        dataModelService.fillSideHotArticles(avatarViewMode, dataModel);
+        dataModelService.fillSideTags(dataModel);
+        dataModelService.fillLatestCmts(dataModel);
     }
+
+
     /**
      * Shows balance ranking list.
      *
@@ -148,7 +238,7 @@ public class InfoProcessor {
      * @param response the specified response
      * @throws Exception exception
      */
-    @RequestProcessing(value = "/info/search-college", method = HTTPRequestMethod.GET)
+    @RequestProcessing(value = "/info/college-detail", method = HTTPRequestMethod.GET)
     @Before(adviceClass = {StopwatchStartAdvice.class, AnonymousViewCheck.class})
     @After(adviceClass = {PermissionGrant.class, StopwatchEndAdvice.class})
     public void showBalanceSearch(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
@@ -157,18 +247,18 @@ public class InfoProcessor {
         final AbstractFreeMarkerRenderer renderer = new SkinRenderer(request);
         context.setRenderer(renderer);
 
-        showParams(request);
-        String schoolname=request.getParameter("schoolname");
-        System.out.println(schoolname);
+        final JSONObject requestJSONObject = Requests.parseRequestJSONObject(request, response);
+        final String schoolname = requestJSONObject.optString("schoolname");
+        System.out.println("sc2"+schoolname);
 
-        renderer.setTemplateName("/info/search-college.ftl");
+        renderer.setTemplateName("/info/college-detail.ftl");
 
 
         final Map<String, Object> dataModel = renderer.getDataModel();
 
         final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);
 
-        final List<JSONObject> schools = schoolQueryService.getSchoolByName("222");
+        final List<JSONObject> schools = schoolQueryService.getSchoolByName(schoolname);
         dataModel.put(Common.TOP_SCHOOL, schools);
 
         dataModelService.fillHeaderAndFooter(request, response, dataModel);

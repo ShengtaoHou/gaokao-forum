@@ -6,20 +6,22 @@
 </h2>
 
 <div class="container-fluid">
+
     <div class="row-fluid">
+
+
         <h4>
             按校名查询高校
         </h4>
         <div class="span12" id="testdiv">
-            <form class="form-search">
+            <form action="${servePath}/info/college" method="POST" class="form-search">
                 <input id="schoolname" name="schoolname" class="input-medium search-query" type="text" />
-                <button type="submit" class="btn" onclick="Search.searchSchoolByName()">查找</button>
+                <button type="submit" class="btn" >查找</button>
 
-                <a rel="nofollow" href="${servePath}/info/search-college">
-                    院校查询
-                </a>
+
 
             </form>
+
         </div>
     </div>
 
@@ -79,14 +81,32 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td><td>西安交通大学</td><td>三本</td><td>陕西</td>
-                </tr>
+                    <#if topSchool??>
+
+                        <#list topSchool as schools>
+                        <tr>
+                            <td>1</td>
+                            <td><a rel="nofollow" href="${servePath}/info/college-detail">${schools.schoolName}</a></td>
+                            <td>三本</td>
+                            <td>陕西</td>
+                        </tr>
+                        </#list>
+
+                    <#else>
+
+                        <tr>
+                            <td>1</td>
+                            <td><a rel="nofollow" href="${servePath}/info/college-detail">西安交通大学</a></td>
+                            <td>三本</td>
+                            <td>陕西</td>
+                        </tr>
+
+                    </#if>
+
                 </tbody>
             </table>
         </div>
     </div>
 
 </div>
-
 </@info>
