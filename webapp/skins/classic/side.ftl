@@ -1,4 +1,18 @@
 <#include 'common/person-info.ftl'/>
+<head>
+    <link rel="stylesheet" href="${staticServePath}/css/buttons.css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        #buttons{
+            width: 70%;
+            align-items:center;
+            align-content:center;
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 5px ;
+        }
+    </style>
+</head>
 
 <#if ADLabel!="">
 <div class="module">
@@ -39,25 +53,12 @@
         权威资料
         </h2>
     </div>
-    <div class="module-panel">
-        <ul class="tag-desc fn-clear">
-
-            <li>
-                <a rel="nofollow" href="${servePath}/info/college">
-                    院校查询
-                </a>
-            </li>
-            <li>
-                <a rel="nofollow" href="${servePath}/info/major">
-                    专业查询
-                </a>
-            </li>
-            <li>
-                <a rel="nofollow" href="${servePath}/info/score">
-                   分数线查询
-                </a>
-            </li>
-        </ul>
+    <div style="text-align: center">
+            <a id="buttons" href="${servePath}/info/score" class="button button-rounded  button-primary-flat">分数线查询</a>
+            <#--a href="${servePath}/info/college" class="button button-rounded button-primary button-large">院校查询</a-->
+            <a id="buttons" href="${servePath}/info/college" class="button button-rounded  button-royal">院校查询</a>
+            <a id="buttons" href="${servePath}/info/major" class="button button-rounded  button-action">专业查询</a>
+            <#--a href="${servePath}/info/major" class="button button-rounded button-primary button-large">专业查询</a-->
     </div>
 </div>
 <#if sideHotArticles?size!=0>
