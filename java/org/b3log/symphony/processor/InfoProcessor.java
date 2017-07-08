@@ -37,6 +37,8 @@ import org.b3log.symphony.service.ActivityQueryService;
 import org.b3log.symphony.service.DataModelService;
 import org.b3log.symphony.service.PointtransferQueryService;
 import org.b3log.symphony.service.SchoolQueryService;
+import org.b3log.symphony.service.MajorQueryService;
+
 import org.b3log.symphony.util.Symphonys;
 import org.json.JSONObject;
 
@@ -127,6 +129,12 @@ public class InfoProcessor {
     private SchoolQueryService schoolQueryService;
 
     /**
+     * Activity query service.
+     */
+    @Inject
+    private MajorQueryService majorQueryService;
+
+    /**
      * Option query service.
      */
     @Inject
@@ -158,20 +166,9 @@ public class InfoProcessor {
 
         renderer.setTemplateName("/info/college.ftl");
 
-//        final JSONObject requestJSONObject = Requests.parseRequestJSONObject(request, response);
-//        final String schoolname = requestJSONObject.optString("schoolname");
-//        System.out.println("sc1"+schoolname);
-
         final Map<String, Object> dataModel = renderer.getDataModel();
 
         final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);
-
-       // final List<JSONObject> users = pointtransferQueryService.getTopBalanceUsers(
-                //avatarViewMode, Symphonys.getInt("topBalanceCnt"));
-        //dataModel.put(Common.TOP_BALANCE_USERS, users);
-
-        //final List<JSONObject> misc = optionQueryService.getMisc();//
-        //dataModel.put(Option.OPTIONS, misc);//
 
         dataModelService.fillHeaderAndFooter(request, response, dataModel);
         dataModelService.fillRandomArticles(avatarViewMode, dataModel);
@@ -179,6 +176,7 @@ public class InfoProcessor {
         dataModelService.fillSideTags(dataModel);
         dataModelService.fillLatestCmts(dataModel);
     }
+
     @RequestProcessing(value = "/info/college", method = HTTPRequestMethod.POST)
     @Before(adviceClass = {StopwatchStartAdvice.class, PermissionCheck.class})
     @After(adviceClass = {PermissionGrant.class, StopwatchEndAdvice.class})
@@ -189,40 +187,37 @@ public class InfoProcessor {
         renderer.setTemplateName("info/college.ftl");
         final Map<String, Object> dataModel = renderer.getDataModel();
 
-        //List<JSONObject> misc = new ArrayList<>();
-
         final Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             final String name = parameterNames.nextElement();
             final String value = request.getParameter(name);
-            System.out.println("infoprocessor update name "+name);
-            System.out.println("infoprocessor update value "+value);
-            //final JSONObject option = new JSONObject();
-            //option.put(Keys.OBJECT_ID, name);
-           //option.put(Option.OPTION_VALUE, value);
-            //option.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_MISC);
-
-            //misc.add(option);
-        }
-/*
-        for (final JSONObject option : misc) {
-            optionMgmtService.updateOption(option.getString(Keys.OBJECT_ID), option);
+            System.out.println("param "+name+" value "+value);
         }
 
-        misc = optionQueryService.getMisc();
-        dataModel.put(Option.OPTIONS, misc);
-*/
         final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);//
-        System.out.println("infoprocessor update");//
 
         final String schoolname = request.getParameter("schoolname");
-        final List<JSONObject> schools = schoolQueryService.getSchoolByName(schoolname);
-        System.out.println("success"+schoolname);
+        final String schoolBatch = request.getParameter("schoolBatch");
+        final String schoolLevel = request.getParameter("schoolLevel");
+        final String schoolType = request.getParameter("schoolType");
+        final String schoolProvince = request.getParameter("schoolProvince");
 
-        dataModel.put(Common.TOP_SCHOOL, schools);
+        if(schoolname== null ||"".equals(schoolname)){
+            //schoolname为空，按条件搜索
+            final List<JSONObject> schools = schoolQueryService.getSchoolByCondition(schoolBatch,schoolLevel,schoolType,schoolProvince);
+            System.out.println("searching for school by condition");
+            dataModel.put(Common.TOP_SCHOOL, schools);
+
+        }else{
+            //schoolname不为空，按文字搜索
+            final List<JSONObject> schools = schoolQueryService.getSchoolByName(schoolname);
+            System.out.println("searching for school by name: "+schoolname);
+            dataModel.put(Common.TOP_SCHOOL, schools);
+        }
+
+
 
         dataModelService.fillHeaderAndFooter(request, response, dataModel);
-
         dataModelService.fillRandomArticles(avatarViewMode, dataModel);//
         dataModelService.fillSideHotArticles(avatarViewMode, dataModel);
         dataModelService.fillSideTags(dataModel);
@@ -291,10 +286,6 @@ public class InfoProcessor {
 
         final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);
 
-        final List<JSONObject> users = pointtransferQueryService.getTopConsumptionUsers(
-                avatarViewMode, Symphonys.getInt("topConsumptionCnt"));
-        dataModel.put(Common.TOP_CONSUMPTION_USERS, users);
-
         dataModelService.fillHeaderAndFooter(request, response, dataModel);
         dataModelService.fillRandomArticles(avatarViewMode, dataModel);
         dataModelService.fillSideHotArticles(avatarViewMode, dataModel);
@@ -302,6 +293,50 @@ public class InfoProcessor {
         dataModelService.fillLatestCmts(dataModel);
     }
 
+    @RequestProcessing(value = "/info/major", method = HTTPRequestMethod.POST)
+    @Before(adviceClass = {StopwatchStartAdvice.class, PermissionCheck.class})
+    @After(adviceClass = {PermissionGrant.class, StopwatchEndAdvice.class})
+    public void searchmajor(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
+            throws Exception {
+        final AbstractFreeMarkerRenderer renderer = new SkinRenderer(request);
+        context.setRenderer(renderer);
+        renderer.setTemplateName("info/major.ftl");
+        final Map<String, Object> dataModel = renderer.getDataModel();
+
+        final Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            final String name = parameterNames.nextElement();
+            final String value = request.getParameter(name);
+            System.out.println("param "+name+" value "+value);
+        }
+
+        final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);//
+
+        final String majorName = request.getParameter("majorName");
+        final String majorBtype = request.getParameter("majorBtype");
+        final String majorStype = request.getParameter("majorStype");
+
+        if(majorName== null ||"".equals(majorName)){
+            //majorname为空，按条件搜索
+            final List<JSONObject> majors = majorQueryService.getMajorByCondition(majorBtype,majorStype);
+            System.out.println("searching for major by condition");
+            dataModel.put(Common.TOP_MAJOR,majors);
+
+        }else{
+            //majorname不为空，按文字搜索
+            final List<JSONObject> majors = majorQueryService.getMajorByName(majorName);
+            System.out.println("searching for major by name: "+majorName);
+            dataModel.put(Common.TOP_MAJOR, majors);
+        }
+
+
+
+        dataModelService.fillHeaderAndFooter(request, response, dataModel);
+        dataModelService.fillRandomArticles(avatarViewMode, dataModel);//
+        dataModelService.fillSideHotArticles(avatarViewMode, dataModel);
+        dataModelService.fillSideTags(dataModel);
+        dataModelService.fillLatestCmts(dataModel);
+    }
     /**
      * Shows consumption ranking list.
      *
@@ -310,7 +345,7 @@ public class InfoProcessor {
      * @param response the specified response
      * @throws Exception exception
      */
-    @RequestProcessing(value = "/info/search-major", method = HTTPRequestMethod.GET)
+    @RequestProcessing(value = "/info/major-detail", method = HTTPRequestMethod.GET)
     @Before(adviceClass = {StopwatchStartAdvice.class, AnonymousViewCheck.class})
     @After(adviceClass = {PermissionGrant.class, StopwatchEndAdvice.class})
     public void showConsumptionSearch(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
@@ -319,7 +354,7 @@ public class InfoProcessor {
         ;
         context.setRenderer(renderer);
 
-        renderer.setTemplateName("/info/search-major.ftl");
+        renderer.setTemplateName("/info/major-detail.ftl");
 
         final Map<String, Object> dataModel = renderer.getDataModel();
 

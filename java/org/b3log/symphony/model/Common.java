@@ -868,9 +868,14 @@ public final class Common {
     public static final String TOP_BALANCE_USERS = "topBalanceUsers";
 
     /**
-     * Key of top balance users.
+     * Key of school
      */
     public static final String TOP_SCHOOL = "topSchool";
+
+    /**
+     * Key of major
+     */
+    public static final String TOP_MAJOR = "topMajor";
 
     /**
      * Key of top consumption users.

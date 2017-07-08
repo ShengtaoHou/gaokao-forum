@@ -23,37 +23,23 @@ package org.b3log.symphony.model;
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
  * @version 1.1.0.1, Jan 5, 2017
  */
-public final class School {
+public final class Major {
     /**
      * School
      */
-    public static final String SCHOOL = "school";
+    public static final String MAJOR = "major";
 
     /**
      * Schools.
      */
-    public static final String SCHOOLS = "schools";
+    public static final String MAJORS = "majors";
 
-    public static final String SCHOOL_NAME= "schoolName";
+    public static final String MAJOR_NAME= "majorName";
 
-    public static final String SCHOOL_PROVINCE= "schoolProvince";
+    public static final String MAJOR_BTYPE= "majorBtype";
 
-    public static final String SCHOOL_TYPE= "schoolType";
+    public static final String MAJOR_STYPE= "majorStype";
 
-    public static final String SCHOOL_BATCH= "schoolBatch";
-
-    public static final String SCHOOL_PHONE= "schoolPhone";
-
-    public static final String SCHOOL_EMAIL= "schoolEmail";
-
-    public static final String SCHOOL_URL= "schoolUrl";
-
-    public static final String SCHOOL_BMAJOR= "schoolBmajor";
-
-    public static final String SCHOOL_LEVEL="schoolLevel";
-
-    public static final String SCHOOL_ADDRESS= "schoolAddress";
-
-    public static final String SCHOOL_INTRODUCE= "schoolIntroduce";
+    public static final String MAJOR_INTRODUCE= "majorIntroduce";
 
 }
