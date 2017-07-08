@@ -3,15 +3,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <#if type == "college">
         <@head title="${wealthRankLabel} - ${symphonyLabel}">
         <link rel="canonical" href="${servePath}/info/college">
         </@head>
         </#if>
 
-        <#if type == "searchcollege">
+        <#if type == "college-detail">
             <@head title="${wealthRankLabel} - ${symphonyLabel}">
-                <link rel="canonical" href="${servePath}/info/search-college">
+                <link rel="canonical" href="${servePath}/info/college-detail">
             </@head>
         </#if>
 
@@ -21,11 +22,6 @@
         </@head>
         </#if>
 
-        <#if type == "majorres">
-            <@head title="${consumptionRankLabel} - ${symphonyLabel}">
-                <link rel="canonical" href="${servePath}/info/search-major">
-            </@head>
-        </#if>
 
         <#if type == "score">
         <@head title="${checkinTopLabel} - ${symphonyLabel}">
@@ -56,9 +52,6 @@
     </div>
 
         <#include "../footer.ftl">
-
-
-
 
         <script src="${staticServePath}/js/settings${miniPostfix}.js?${staticResourceVersion}"></script>
         <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
