@@ -23,7 +23,7 @@ package org.b3log.symphony.model;
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
  * @version 1.1.0.1, Jan 5, 2017
  */
-public final class School {
+public final class ProvinceScore {
     /**
      * School
      */

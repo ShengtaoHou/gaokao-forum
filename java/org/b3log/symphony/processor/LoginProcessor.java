@@ -719,6 +719,7 @@ public class LoginProcessor {
 
         final JSONObject requestJSONObject = Requests.parseRequestJSONObject(request, response);
         final String nameOrEmail = requestJSONObject.optString("nameOrEmail");
+        System.out.println("nameOrEmail"+nameOrEmail);
 
         try {
             JSONObject user = userQueryService.getUserByName(nameOrEmail);

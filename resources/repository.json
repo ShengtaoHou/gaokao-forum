@@ -1585,7 +1585,87 @@
                 {
                     "name": "schoolName",
                     "type": "String",
-                    "length": 128
+                    "length": 100
+                },
+                {
+                    "name": "schoolProvince",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "schoolType",
+                    "type": "String",
+                    "length": 10
+                },
+                {
+                    "name": "schoolBatch",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "schoolPhone",
+                    "type": "String",
+                    "length": 15
+                },
+                {
+                    "name": "schoolEmail",
+                    "type": "String",
+                    "length": 50
+                },
+                {
+                    "name": "schoolUrl",
+                    "type": "String",
+                    "length": 100
+                },
+                {
+                    "name": "schoolBmajor",
+                    "type": "String",
+                    "length": 1000
+                },
+                {
+                    "name": "schoolLevel",
+                    "type": "String",
+                    "length": 10
+                },
+                {
+                    "name": "schoolAddress",
+                    "type": "String",
+                    "length": 100
+                },
+                {
+                    "name": "schoolIntroduce",
+                    "type": "String",
+                    "length": 1000
+                }
+            ]
+        },
+        {
+            "name": "major",
+            "keys": [
+                {
+                    "name": "oId",
+                    "type": "String",
+                    "length": 19
+                },
+                {
+                    "name": "majorName",
+                    "type": "String",
+                    "length": 100
+                },
+                {
+                    "name": "majorBtype",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "majorStype",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "majorIntroduce",
+                    "type": "String",
+                    "length": 1000
                 }
             ]
         },

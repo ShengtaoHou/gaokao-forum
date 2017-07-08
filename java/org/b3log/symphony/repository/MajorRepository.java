@@ -20,11 +20,14 @@ package org.b3log.symphony.repository;
 import org.b3log.latke.Keys;
 import org.b3log.latke.repository.*;
 import org.b3log.latke.repository.annotation.Repository;
-import org.b3log.symphony.model.School;
 import org.b3log.latke.util.CollectionUtils;
+import org.b3log.symphony.model.Major;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * School repository.
  *
@@ -33,13 +36,13 @@ import java.util.*;
  * @since 1.9.0
  */
 @Repository
-public class SchoolRepository extends AbstractRepository {
+public class MajorRepository extends AbstractRepository {
 
     /**
      * Public constructor.
      */
-    public SchoolRepository() {
-        super(School.SCHOOL);
+    public MajorRepository() {
+        super(Major.MAJOR);
     }
 
     /**
@@ -53,7 +56,7 @@ public class SchoolRepository extends AbstractRepository {
 
         final List<JSONObject> ret = new ArrayList<JSONObject>();
 
-        Query query = new Query().setFilter(new PropertyFilter(School.SCHOOL_NAME, FilterOperator.EQUAL, name))
+        Query query = new Query().setFilter(new PropertyFilter(Major.MAJOR_NAME, FilterOperator.EQUAL, name))
                 .setPageCount(1);;
 
         final JSONObject result1 = get(query);
@@ -69,41 +72,32 @@ public class SchoolRepository extends AbstractRepository {
 
     }
 
-    public List<JSONObject> getByCondition(final String schoolBatch,final String schoolLevel,final String schoolType,final String schoolProvince) throws RepositoryException {
+    public List<JSONObject> getByCondition(final String majorBtype,final String majorStype) throws RepositoryException {
 
         final List<JSONObject> ret = new ArrayList<JSONObject>();
 
         final List<Filter> filters = new ArrayList<Filter>();
 
         int filcount=0;
-        if(!(schoolBatch== null ||"".equals(schoolBatch))){
-            filters.add(new PropertyFilter(School.SCHOOL_BATCH, FilterOperator.EQUAL, schoolBatch));
+        if(!(majorBtype== null ||"".equals(majorBtype))){
+            filters.add(new PropertyFilter(Major.MAJOR_BTYPE, FilterOperator.EQUAL, majorBtype));
             filcount++;
         }
 
-        if(!(schoolLevel== null ||"".equals(schoolLevel))){
-            filters.add(new PropertyFilter(School.SCHOOL_LEVEL, FilterOperator.EQUAL, schoolLevel));
+        if(!(majorStype== null ||"".equals(majorStype))){
+            filters.add(new PropertyFilter(Major.MAJOR_STYPE, FilterOperator.EQUAL, majorStype));
             filcount++;
         }
 
-        if(!(schoolType== null ||"".equals(schoolType))){
-            filters.add(new PropertyFilter(School.SCHOOL_TYPE, FilterOperator.EQUAL, schoolType));
-            filcount++;
-        }
-
-        if(!(schoolProvince== null ||"".equals(schoolProvince))){
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
-            filcount++;
-        }
         final Query query;
         if(filcount>=2){
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters));
         }else if(filcount==1){
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
+            filters.add(new PropertyFilter(Major.MAJOR_STYPE, FilterOperator.EQUAL, majorStype));
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.OR, filters));
         }else{
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
+            filters.add(new PropertyFilter(Major.MAJOR_STYPE, FilterOperator.EQUAL, majorStype));
+            filters.add(new PropertyFilter(Major.MAJOR_STYPE, FilterOperator.EQUAL, majorStype));
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.OR, filters));
         }
 

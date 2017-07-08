@@ -17,29 +17,17 @@
  */
 package org.b3log.symphony.service;
 
-import org.apache.commons.lang.StringUtils;
-import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.inject.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.model.Pagination;
 import org.b3log.latke.repository.*;
 import org.b3log.latke.repository.annotation.Transactional;
-import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.urlfetch.*;
-import org.b3log.latke.util.CollectionUtils;
-import org.b3log.latke.util.Paginator;
-import org.b3log.symphony.model.School;
-import org.b3log.symphony.repository.SchoolRepository;
-import org.b3log.symphony.util.Symphonys;
-import org.json.JSONArray;
+import org.b3log.symphony.repository.MajorRepository;
 import org.json.JSONObject;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Book query service.
@@ -49,44 +37,33 @@ import java.util.Map;
  * @since 1.9.0
  */
 @Service
-public class SchoolQueryService {
+public class MajorQueryService {
 
-    /**
-     * Logger.
-     */
+
     private static final Logger LOGGER = Logger.getLogger(AvatarQueryService.class);
 
-    /**
-     * Book repository.
-     */
+
     @Inject
-    private SchoolRepository schoolRepository;
+    private MajorRepository majorRepository;
 
 
-
-    /**
-     * Gets a book's information with the specified ISBN.
-     *
-     * @param isbn the specified ISBN
-     * @return book info, returns {@code null} if not found
-     */
     @Transactional
-    public List<JSONObject> getSchoolByName(final String name) {
+    public List<JSONObject> getMajorByName(final String name) {
 
         try {
-            return schoolRepository.getByName(name);
+            return majorRepository.getByName(name);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets school by name [" + name + "] failed", e);
+            LOGGER.log(Level.ERROR, "Gets major by name [" + name + "] failed", e);
             return null;
         }
     }
     @Transactional
-    public List<JSONObject> getSchoolByCondition(final String schoolBatch,final String schoolLevel,final String schoolType,final String schoolProvince) {
+    public List<JSONObject> getMajorByCondition(final String majorBtype,final String majorStype) {
 
         try {
-            return schoolRepository.getByCondition(schoolBatch,schoolLevel,schoolType,schoolProvince);
+            return majorRepository.getByCondition(majorBtype,majorStype);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets school by condition failed", e);
+            LOGGER.log(Level.ERROR, "Gets major by condition failed", e);
             return null;
         }
     }
