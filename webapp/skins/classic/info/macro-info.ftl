@@ -22,6 +22,11 @@
         </@head>
         </#if>
 
+        <#if type == "major-detail">
+            <@head title="${consumptionRankLabel} - ${symphonyLabel}">
+                <link rel="canonical" href="${servePath}/info/major-detail">
+            </@head>
+        </#if>
 
         <#if type == "score">
         <@head title="${checkinTopLabel} - ${symphonyLabel}">

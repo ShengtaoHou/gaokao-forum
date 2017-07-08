@@ -878,6 +878,16 @@ public final class Common {
     public static final String TOP_MAJOR = "topMajor";
 
     /**
+     * Key of major
+     */
+    public static final String TOP_SCORE = "topScore";
+
+    /**
+     * Key of major
+     */
+     public static final String BATCH_SCORE = "batchScore";
+
+    /**
      * Key of top consumption users.
      */
     public static final String TOP_CONSUMPTION_USERS = "topConsumptionUsers";

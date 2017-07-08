@@ -32,7 +32,7 @@
                     <select id="schoolBatch" name="schoolBatch" class="form-control">
                         <option value="">请选择层次</option>
                         <option value="本科">本科</option>
-                        <option value="专科">专科</option>
+                        <option value="高职专科">高职专科</option>
                     </select>
                 </div>
             </div>
@@ -77,40 +77,40 @@
                     <label for="name">高校所在地</label>
                     <select id="schoolProvince" name="schoolProvince" class="form-control">
                         <option value ="">请选择省份</option>
-                        <option value ="北京市">北京市 </option>
-                        <option value ="天津市">天津市 </option>
-                        <option value ="上海市">上海市 </option>
-                        <option value ="重庆市">重庆市 </option>
-                        <option value ="河北省">河北省 </option>
-                        <option value ="山西省">山西省 </option>
-                        <option value ="辽宁省">辽宁省 </option>
-                        <option value ="吉林省">吉林省 </option>
-                        <option value ="黑龙江省">黑龙江省</option>
-                        <option value ="江苏省">江苏省 </option>
-                        <option value ="浙江省">浙江省 </option>
-                        <option value ="安徽省">安徽省 </option>
-                        <option value ="福建省">福建省 </option>
-                        <option value ="江西省">江西省 </option>
-                        <option value ="山东省">山东省 </option>
-                        <option value ="河南省">河南省 </option>
-                        <option value ="湖北省">湖北省 </option>
-                        <option value ="湖南省">湖南省 </option>
-                        <option value ="广东省">广东省 </option>
-                        <option value ="海南省">海南省 </option>
-                        <option value ="四川省">四川省 </option>
-                        <option value ="贵州省">贵州省 </option>
-                        <option value ="云南省">云南省 </option>
-                        <option value ="陕西省">陕西省 </option>
-                        <option value ="甘肃省">甘肃省 </option>
-                        <option value ="青海省">青海省 </option>
-                        <option value ="台湾省">台湾省 </option>
-                        <option value ="广西壮族自治区">广西壮族自治区</option>
-                        <option value ="内蒙古自治区">内蒙古自治区</option>
-                        <option value ="西藏自治区">西藏自治区</option>
-                        <option value ="宁夏回族自治区">宁夏回族自治区 </option>
-                        <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
-                        <option value ="香港特别行政区">香港特别行政区</option>
-                        <option value ="澳门特别行政区">澳门特别行政区</option>
+                        <option value ="北京">北京市 </option>
+                        <option value ="天津">天津市 </option>
+                        <option value ="上海">上海市 </option>
+                        <option value ="重庆">重庆市 </option>
+                        <option value ="河北">河北省 </option>
+                        <option value ="山西">山西省 </option>
+                        <option value ="辽宁">辽宁省 </option>
+                        <option value ="吉林">吉林省 </option>
+                        <option value ="黑龙江">黑龙江省</option>
+                        <option value ="江苏">江苏省 </option>
+                        <option value ="浙江">浙江省 </option>
+                        <option value ="安徽">安徽省 </option>
+                        <option value ="福建">福建省 </option>
+                        <option value ="江西">江西省 </option>
+                        <option value ="山东">山东省 </option>
+                        <option value ="河南">河南省 </option>
+                        <option value ="湖北">湖北省 </option>
+                        <option value ="湖南">湖南省 </option>
+                        <option value ="广东">广东省 </option>
+                        <option value ="海南">海南省 </option>
+                        <option value ="四川">四川省 </option>
+                        <option value ="贵州">贵州省 </option>
+                        <option value ="云南">云南省 </option>
+                        <option value ="陕西">陕西省 </option>
+                        <option value ="甘肃">甘肃省 </option>
+                        <option value ="青海">青海省 </option>
+                        <option value ="台湾">台湾省 </option>
+                        <option value ="广西">广西壮族自治区</option>
+                        <option value ="内蒙古">内蒙古自治区</option>
+                        <option value ="西藏">西藏自治区</option>
+                        <option value ="宁夏">宁夏回族自治区 </option>
+                        <option value ="新疆">新疆维吾尔自治区</option>
+                        <option value ="香港">香港特别行政区</option>
+                        <option value ="澳门">澳门特别行政区</option>
                     </select>
                 </div>
             </div>
@@ -134,10 +134,11 @@
                 </thead>
                 <tbody>
                     <#if topSchool??>
-
+                        <#assign x=0/>
                         <#list topSchool as schools>
+                        <#assign x=x+1/>
                         <tr>
-                            <td>1</td>
+                            <td>${x}</td>
                             <td><a rel="nofollow" href="${servePath}/info/college-detail">${schools.schoolName}</a></td>
                             <td>${schools.schoolLevel}</td>
                             <td>${schools.schoolProvince}</td>

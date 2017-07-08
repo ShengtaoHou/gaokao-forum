@@ -22,7 +22,7 @@
         }
     </style>
 </head>
-<@info "major">
+<@info "major-detail">
 <div style="width:100%">
     <p id="intro">计算机科学与技术</p>
     <hr color="#EEEEE0">

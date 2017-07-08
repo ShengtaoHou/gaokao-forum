@@ -64,10 +64,11 @@
                 </thead>
                 <tbody>
                     <#if topMajor??>
-
+                        <#assign x=0/>
                         <#list topMajor as majors>
+                            <#assign x=x+1/>
                         <tr>
-                            <td>1</td>
+                            <td>${x}</td>
                             <td><a rel="nofollow" href="${servePath}/info/major-detail">${majors.majorName}</a></td>
                             <td>${majors.majorBtype}</td>
                             <td>${majors.majorStype}</td>
@@ -76,12 +77,6 @@
 
                     <#else>
 
-                    <tr>
-                        <td>1</td>
-                        <td><a rel="nofollow" href="${servePath}/info/college-detail">111</a></td>
-                        <td>11</td>
-                        <td>1</td>
-                    </tr>
 
                     </#if>
 
