@@ -1595,7 +1595,7 @@
                 {
                     "name": "schoolType",
                     "type": "String",
-                    "length": 10
+                    "length": 20
                 },
                 {
                     "name": "schoolBatch",
@@ -1603,9 +1603,14 @@
                     "length": 20
                 },
                 {
+                    "name": "schoolLevel",
+                    "type": "String",
+                    "length": 20
+                },
+                {
                     "name": "schoolPhone",
                     "type": "String",
-                    "length": 15
+                    "length": 20
                 },
                 {
                     "name": "schoolEmail",
@@ -1623,11 +1628,6 @@
                     "length": 1000
                 },
                 {
-                    "name": "schoolLevel",
-                    "type": "String",
-                    "length": 10
-                },
-                {
                     "name": "schoolAddress",
                     "type": "String",
                     "length": 100
@@ -1636,6 +1636,102 @@
                     "name": "schoolIntroduce",
                     "type": "String",
                     "length": 1000
+                }
+            ]
+        },
+        {
+            "name": "schoolscore",
+            "keys": [
+                {
+                    "name": "oId",
+                    "type": "String",
+                    "length": 19
+                },
+                {
+                    "name": "studentProvince",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "year",
+                    "type": "String",
+                    "length": 10
+                },
+                {
+                    "name": "artOrSci",
+                    "type": "String",
+                    "length": 10
+                },
+                {
+                    "name": "batch",
+                    "type": "String",
+                    "length": 10
+                },
+                {
+                    "name": "schoolName",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "schoolProvince",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "scoreMax",
+                    "type": "int"
+                },
+                {
+                    "name": "scoreAvg",
+                    "type": "int"
+                },
+                {
+                    "name": "scoreMin",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "provincescore",
+            "keys": [
+                {
+                    "name": "oId",
+                    "type": "String",
+                    "length": 19
+                },
+                {
+                    "name": "province",
+                    "type": "String",
+                    "length": 20
+                },
+                {
+                    "name": "year",
+                    "type": "String",
+                    "length": 10
+                },
+                {
+                    "name": "a1",
+                    "type": "int"
+                },
+                {
+                    "name": "a2",
+                    "type": "int"
+                },
+                {
+                    "name": "a3",
+                    "type": "int"
+                },
+                {
+                    "name": "s1",
+                    "type": "int"
+                },
+                {
+                    "name": "s2",
+                    "type": "int"
+                },
+                {
+                    "name": "s3",
+                    "type": "int"
                 }
             ]
         },

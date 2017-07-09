@@ -1,4 +1,4 @@
-<#include 'common/person-info.ftl'/>
+<#--<#include 'common/person-info.ftl'/>-->
 <head>
     <link rel="stylesheet" href="${staticServePath}/css/buttons.css">
     <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -14,19 +14,20 @@
     </style>
 </head>
 
-<#if ADLabel!="">
-<div class="module">
-    <div class="module-header">
-        <h2>
-            ${sponsorLabel} 
-            <a href="https://hacpai.com/article/1460083956075" class="fn-right ft-13 ft-gray" target="_blank">${wantPutOnLabel}</a>
-        </h2>
-    </div>
-    <div class="module-panel ad fn-clear">
-        ${ADLabel}
-    </div>
-</div>
-</#if>
+<#--<#if ADLabel!="">-->
+<#--<div class="module">-->
+    <#--<div class="module-header">-->
+        <#--<h2>-->
+            <#--${sponsorLabel} -->
+            <#--<a href="https://hacpai.com/article/1460083956075" class="fn-right ft-13 ft-gray" target="_blank">${wantPutOnLabel}</a>-->
+        <#--</h2>-->
+    <#--</div>-->
+    <#--<div class="module-panel ad fn-clear">-->
+        <#--${ADLabel}-->
+    <#--</div>-->
+<#--</div>-->
+<#--</#if>-->
+
 <#--
 <#if navTrendTags?size!=0>
 <div class="module">
@@ -117,45 +118,46 @@
     </div>
 </div>
 </#if>
-<#if sideRandomArticles?size!=0>
-<div class="module">
-    <div class="module-header">
-        <h2>
-            ${randomArticleLabel}
-        </h2>
-    </div>
-    <div class="module-panel">
-        <ul class="module-list">
-            <#list sideRandomArticles as randomArticle>
-            <li<#if !randomArticle_has_next> class="last"</#if>>
-                <#if "someone" != randomArticle.articleAuthorName>
-                <a rel="nofollow" href="${servePath}/member/${randomArticle.articleAuthorName}"></#if>
-                    <span aria-label="${randomArticle.articleAuthorName}"
-                          style="background-image:url('${randomArticle.articleAuthorThumbnailURL20}')"
-                          class="avatar-small tooltipped tooltipped-se slogan"></span>
-                    <#if "someone" != randomArticle.articleAuthorName></a></#if>
-                <a class="title" rel="nofollow" href="${servePath}${randomArticle.articlePermalink}">${randomArticle.articleTitleEmoj}</a>
-            </li>
-            </#list>
-        </ul>
-    </div>
-</div>
-</#if>
-<#if newTags?size!=0>
-<div class="module">
-    <div class="module-header">
-        <h2>
-            ${newTagLabel}
-        </h2>
-    </div>
-    <div class="module-panel">
-        <ul class="fn-clear tags">
-            <#list newTags as newTag>
-            <li>
-                <a class="ft-gray ft-13" rel="nofollow" href="${servePath}/tag/${newTag.tagURI}">${newTag.tagTitle}</a> &nbsp;
-            </li>
-            </#list>
-        </ul>
-    </div>
-</div>
-</#if>
+
+<#--<#if sideRandomArticles?size!=0>-->
+<#--<div class="module">-->
+    <#--<div class="module-header">-->
+        <#--<h2>-->
+            <#--${randomArticleLabel}-->
+        <#--</h2>-->
+    <#--</div>-->
+    <#--<div class="module-panel">-->
+        <#--<ul class="module-list">-->
+            <#--<#list sideRandomArticles as randomArticle>-->
+            <#--<li<#if !randomArticle_has_next> class="last"</#if>>-->
+                <#--<#if "someone" != randomArticle.articleAuthorName>-->
+                <#--<a rel="nofollow" href="${servePath}/member/${randomArticle.articleAuthorName}"></#if>-->
+                    <#--<span aria-label="${randomArticle.articleAuthorName}"-->
+                          <#--style="background-image:url('${randomArticle.articleAuthorThumbnailURL20}')"-->
+                          <#--class="avatar-small tooltipped tooltipped-se slogan"></span>-->
+                    <#--<#if "someone" != randomArticle.articleAuthorName></a></#if>-->
+                <#--<a class="title" rel="nofollow" href="${servePath}${randomArticle.articlePermalink}">${randomArticle.articleTitleEmoj}</a>-->
+            <#--</li>-->
+            <#--</#list>-->
+        <#--</ul>-->
+    <#--</div>-->
+<#--</div>-->
+<#--</#if>-->
+<#--<#if newTags?size!=0>-->
+<#--<div class="module">-->
+    <#--<div class="module-header">-->
+        <#--<h2>-->
+            <#--${newTagLabel}-->
+        <#--</h2>-->
+    <#--</div>-->
+    <#--<div class="module-panel">-->
+        <#--<ul class="fn-clear tags">-->
+            <#--<#list newTags as newTag>-->
+            <#--<li>-->
+                <#--<a class="ft-gray ft-13" rel="nofollow" href="${servePath}/tag/${newTag.tagURI}">${newTag.tagTitle}</a> &nbsp;-->
+            <#--</li>-->
+            <#--</#list>-->
+        <#--</ul>-->
+    <#--</div>-->
+<#--</div>-->
+<#--</#if>-->

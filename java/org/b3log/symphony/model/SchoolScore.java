@@ -24,36 +24,27 @@ package org.b3log.symphony.model;
  * @version 1.1.0.1, Jan 5, 2017
  */
 public final class SchoolScore {
-    /**
-     * School
-     */
-    public static final String SCHOOL = "school";
 
-    /**
-     * Schools.
-     */
-    public static final String SCHOOLS = "schools";
+    public static final String SCHOOLSCORE = "schoolscore";
 
-    public static final String SCHOOL_NAME= "schoolName";
+    public static final String SCHOOLSCORES = "schoolscores";
+
+    public static final String STUDENT_PROVINCE= "studentProvince";
+
+    public static final String YEAR= "year";
+
+    public static final String ARTORSCI= "artOrSci";
+
+    public static final String BATCH= "batch";
+
+    public static final String SCHOOL_NAME = "schoolName";
 
     public static final String SCHOOL_PROVINCE= "schoolProvince";
 
-    public static final String SCHOOL_TYPE= "schoolType";
+    public static final int SCORE_MAX=0;
 
-    public static final String SCHOOL_BATCH= "schoolBatch";
+    public static final int SCORE_AVG=0;
 
-    public static final String SCHOOL_PHONE= "schoolPhone";
-
-    public static final String SCHOOL_EMAIL= "schoolEmail";
-
-    public static final String SCHOOL_URL= "schoolUrl";
-
-    public static final String SCHOOL_BMAJOR= "schoolBmajor";
-
-    public static final String SCHOOL_LEVEL="schoolLevel";
-
-    public static final String SCHOOL_ADDRESS= "schoolAddress";
-
-    public static final String SCHOOL_INTRODUCE= "schoolIntroduce";
+    public static final int SCORE_MIN=0;
 
 }

@@ -26,13 +26,10 @@ import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.freemarker.AbstractFreeMarkerRenderer;
 import org.b3log.symphony.model.Common;
-import org.b3log.symphony.model.Permission;
 import org.b3log.symphony.model.UserExt;
-import org.b3log.symphony.model.Verifycode;
 import org.b3log.symphony.processor.advice.*;
 import org.b3log.symphony.processor.advice.stopwatch.StopwatchEndAdvice;
 import org.b3log.symphony.processor.advice.stopwatch.StopwatchStartAdvice;
-import org.b3log.symphony.processor.advice.validate.UserRegisterValidation;
 import org.b3log.symphony.service.ActivityQueryService;
 import org.b3log.symphony.service.DataModelService;
 import org.b3log.symphony.service.PointtransferQueryService;
@@ -69,24 +66,13 @@ import org.b3log.latke.servlet.renderer.freemarker.AbstractFreeMarkerRenderer;
 import org.b3log.latke.util.Locales;
 import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.Strings;
-import org.b3log.symphony.model.*;
 import org.b3log.symphony.processor.advice.PermissionGrant;
-import org.b3log.symphony.processor.advice.stopwatch.StopwatchEndAdvice;
-import org.b3log.symphony.processor.advice.stopwatch.StopwatchStartAdvice;
-import org.b3log.symphony.processor.advice.validate.UserForgetPwdValidation;
-import org.b3log.symphony.processor.advice.validate.UserRegister2Validation;
-import org.b3log.symphony.processor.advice.validate.UserRegisterValidation;
 import org.b3log.symphony.service.*;
-import org.b3log.symphony.util.Sessions;
-import org.b3log.symphony.util.Symphonys;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Top ranking list processor.
@@ -133,6 +119,12 @@ public class InfoProcessor {
      */
     @Inject
     private MajorQueryService majorQueryService;
+
+    /**
+     * Activity query service.
+     */
+    @Inject
+    private ScoreQueryService scoreQueryService;
 
     /**
      * Option query service.
@@ -394,14 +386,63 @@ public class InfoProcessor {
 
         final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);
 
-        final List<JSONObject> users = activityQueryService.getTopCheckinUsers(
-                avatarViewMode, Symphonys.getInt("topCheckinCnt"));
-        dataModel.put(Common.TOP_CHECKIN_USERS, users);
-
         dataModelService.fillHeaderAndFooter(request, response, dataModel);
         dataModelService.fillRandomArticles(avatarViewMode, dataModel);
         dataModelService.fillSideHotArticles(avatarViewMode, dataModel);
         dataModelService.fillSideTags(dataModel);
         dataModelService.fillLatestCmts(dataModel);
     }
+
+    @RequestProcessing(value = "/info/score", method = HTTPRequestMethod.POST)
+    @Before(adviceClass = {StopwatchStartAdvice.class, PermissionCheck.class})
+    @After(adviceClass = {PermissionGrant.class, StopwatchEndAdvice.class})
+    public void searchscore(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
+            throws Exception {
+        final AbstractFreeMarkerRenderer renderer = new SkinRenderer(request);
+        context.setRenderer(renderer);
+        renderer.setTemplateName("info/score.ftl");
+        final Map<String, Object> dataModel = renderer.getDataModel();
+
+        final Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            final String name = parameterNames.nextElement();
+            final String value = request.getParameter(name);
+            System.out.println("param "+name+" value "+value);
+        }
+
+        final int avatarViewMode = (int) request.getAttribute(UserExt.USER_AVATAR_VIEW_MODE);
+
+
+        final String schoolProvince = request.getParameter("schoolProvince");
+        final String studentProvince = request.getParameter("studentProvince");
+        final String batch = request.getParameter("batch");
+        final String artOrSci = request.getParameter("artOrSci");
+
+        final String schoolName = request.getParameter("schoolName");
+        final String year = request.getParameter("year");
+
+        if(!(schoolName== null ||"".equals(schoolName))){
+            //2 某高校投档线查询，因为只有这种需求学校名称非空
+            final List<JSONObject> scores = scoreQueryService.getOneSchoolScore(studentProvince,artOrSci,batch,schoolName,schoolProvince);
+            System.out.println("searching for one school score");
+            dataModel.put(Common.TOP_SCORE,scores);
+        }else if(!(artOrSci== null ||"".equals(artOrSci))){
+            //若干高校投档线查询，有文理科参数
+            final List<JSONObject> scores = scoreQueryService.getManySchoolScore(studentProvince,artOrSci,batch,year,schoolProvince);
+            System.out.println("searching for many school score");
+            dataModel.put(Common.TOP_SCORE,scores);
+        }else {
+            //批次线查询，没有文理科参数
+            final List<JSONObject> scores = scoreQueryService.getProvinceScore(studentProvince,year);
+            System.out.println("searching for province school score");
+            dataModel.put(Common.BATCH_SCORE,scores);
+        }
+
+        dataModelService.fillHeaderAndFooter(request, response, dataModel);
+        dataModelService.fillRandomArticles(avatarViewMode, dataModel);//
+        dataModelService.fillSideHotArticles(avatarViewMode, dataModel);
+        dataModelService.fillSideTags(dataModel);
+        dataModelService.fillLatestCmts(dataModel);
+    }
+
 }
