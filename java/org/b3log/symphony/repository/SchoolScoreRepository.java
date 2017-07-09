@@ -80,11 +80,11 @@ public class SchoolScoreRepository extends AbstractRepository {
         if(filcount>=2){
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters));
         }else if(filcount==1){
-            filters.add(new PropertyFilter(SchoolScore.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
+            filters.add(new PropertyFilter(SchoolScore.SCHOOL_PROVINCE, FilterOperator.EQUAL, "打酱油的字符串"));
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.OR, filters));
         }else{
-            filters.add(new PropertyFilter(SchoolScore.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
-            filters.add(new PropertyFilter(SchoolScore.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
+            filters.add(new PropertyFilter(SchoolScore.SCHOOL_PROVINCE, FilterOperator.EQUAL, "打酱油的字符串"));
+            filters.add(new PropertyFilter(SchoolScore.SCHOOL_PROVINCE, FilterOperator.EQUAL, "打酱油的字符串"));
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.OR, filters));
         }
 

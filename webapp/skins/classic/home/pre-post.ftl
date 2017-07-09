@@ -18,30 +18,30 @@
                     </a>
                     <div class="ft-gray">${addNormalArticleTipLabel}</div>
                 </div>
-                <div>
-                    <a href="${servePath}/post?type=3">
-                        <svg><use xlink:href="#video"></use></svg> <br/>
-                        ${thoughtLabel}
-                    </a>
-                    <div class="ft-gray">
-                        ${addThoughtArticleTipLabel}
-                        <a href="https://hacpai.com/article/1441942422856" target="_blank">(?)</a>
-                    </div>
-                </div>
-                <div>
-                    <a href="${servePath}/post?type=1">
-                        <svg><use xlink:href="#locked"></use></svg> <br/>
-                        ${discussionLabel}
-                    </a>
-                    <div class="ft-gray">${addDiscussionArticleTipLabel}</div>
-                </div>
-                <div>
-                    <a href="${servePath}/post?type=2">
-                        <svg><use xlink:href="#feed"></use></svg> <br/>
-                        ${cityBroadcastLabel}
-                    </a>
-                    <div class="ft-gray">${addCityArticleTipLabel} <i>${broadcastPoint}</i> ${pointLabel}</div>
-                </div>
+                <#--<div>-->
+                    <#--<a href="${servePath}/post?type=3">-->
+                        <#--<svg><use xlink:href="#video"></use></svg> <br/>-->
+                        <#--${thoughtLabel}-->
+                    <#--</a>-->
+                    <#--<div class="ft-gray">-->
+                        <#--${addThoughtArticleTipLabel}-->
+                        <#--<a href="https://hacpai.com/article/1441942422856" target="_blank">(?)</a>-->
+                    <#--</div>-->
+                <#--</div>-->
+                <#--<div>-->
+                    <#--<a href="${servePath}/post?type=1">-->
+                        <#--<svg><use xlink:href="#locked"></use></svg> <br/>-->
+                        <#--${discussionLabel}-->
+                    <#--</a>-->
+                    <#--<div class="ft-gray">${addDiscussionArticleTipLabel}</div>-->
+                <#--</div>-->
+                <#--<div>-->
+                    <#--<a href="${servePath}/post?type=2">-->
+                        <#--<svg><use xlink:href="#feed"></use></svg> <br/>-->
+                        <#--${cityBroadcastLabel}-->
+                    <#--</a>-->
+                    <#--<div class="ft-gray">${addCityArticleTipLabel} <i>${broadcastPoint}</i> ${pointLabel}</div>-->
+                <#--</div>-->
             </div>
         </div>
         <#include "../footer.ftl">

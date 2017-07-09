@@ -12,6 +12,7 @@
 </#if>
 
 <#if isLoggedIn>
+
 <div class="module person-info" data-percent="${liveness}">
     <div class="module-panel tooltipped tooltipped-s" aria-label="${todayActivityLabel} ${liveness}%">
         <ul class="status fn-flex">
@@ -47,7 +48,7 @@
                     <#if 0 == currentUser.userAppRole>0x${currentUser.userPointHex}<#else><div class="painter-point" style="background-color: #${currentUser.userPointCC}"></div></#if></a>
             </div>
         </div>
-    </div> 
+    </div>
     <div class="top-left activity-board"></div>
     <div class="top-right activity-board"></div>
     <div class="right activity-board"></div>

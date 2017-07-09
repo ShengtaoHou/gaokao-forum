@@ -376,4 +376,25 @@ var Verify = {
             if ($it.hasClass('current')) {
                 Util.unfollow(window, $it.data('id'), 'tag');
                 $it.removeClass('current');
-            } els
+            } else {
+                Util.follow(window, $it.data('id'), 'tag');
+                $it.addClass('current');
+            }
+        });
+
+        step(currentStep);
+
+        $('.tag-desc').isotope({
+            transitionDuration: '1.5s',
+            filter: 'li',
+            layoutMode: 'fitRows'
+        });
+
+        // random select one tag
+
+        var random = parseInt(Math.random() * tagSize);
+        $('.tag-desc li:eq(' + random + ')').addClass('current');
+        Util.follow(window, $('.tag-desc li:eq(' + random + ')').data('id'), 'tag');
+
+    }
+};

@@ -85,6 +85,7 @@ public class ScoreQueryService {
     @Transactional
     public List<JSONObject> getProvinceScore(final String province,final String year) {
         try {
+            System.out.println("ScoreQueryService getP");
             return provinceScoreRepository.getScore(province,year);
         } catch (final RepositoryException e) {
             LOGGER.log(Level.ERROR, "Gets province score failed", e);

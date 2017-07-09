@@ -5,31 +5,31 @@
     <head>
 
         <#if type == "college">
-        <@head title="${wealthRankLabel} - ${symphonyLabel}">
+        <@head title="院校查询">
         <link rel="canonical" href="${servePath}/info/college">
         </@head>
         </#if>
 
         <#if type == "college-detail">
-            <@head title="${wealthRankLabel} - ${symphonyLabel}">
+            <@head title="院校详情">
                 <link rel="canonical" href="${servePath}/info/college-detail">
             </@head>
         </#if>
 
         <#if type == "major">
-        <@head title="${consumptionRankLabel} - ${symphonyLabel}">
+        <@head title="专业查询">
             <link rel="canonical" href="${servePath}/info/major">
         </@head>
         </#if>
 
         <#if type == "major-detail">
-            <@head title="${consumptionRankLabel} - ${symphonyLabel}">
+            <@head title="专业详情">
                 <link rel="canonical" href="${servePath}/info/major-detail">
             </@head>
         </#if>
 
         <#if type == "score">
-        <@head title="${checkinTopLabel} - ${symphonyLabel}">
+        <@head title="分数线查询">
         <link rel="canonical" href="${servePath}/info/score">
         </@head>
         </#if>
@@ -39,6 +39,7 @@
 
         <link rel="stylesheet" href="${staticServePath}/css/index.css?${staticResourceVersion}" />
         <link rel="stylesheet" href="${staticServePath}/css/responsive.css?${staticResourceVersion}" />
+
     </head>
     <body>
         <#include "../header.ftl">

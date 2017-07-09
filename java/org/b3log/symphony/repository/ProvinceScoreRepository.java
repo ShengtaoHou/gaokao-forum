@@ -47,10 +47,10 @@ public class ProvinceScoreRepository extends AbstractRepository {
 
 
     public List<JSONObject> getScore(final String province,final String year) throws RepositoryException {
-
+        System.out.println("PS repository getP");
         final List<JSONObject> ret = new ArrayList<JSONObject>();
 
-        final Query query = new Query().setFilter(CompositeFilterOperator.or(
+        final Query query = new Query().setFilter(CompositeFilterOperator.and(
                 new PropertyFilter(ProvinceScore.YEAR, FilterOperator.EQUAL, year),
                 new PropertyFilter(ProvinceScore.PROVINCE, FilterOperator.EQUAL, province)
         ));

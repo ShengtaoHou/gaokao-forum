@@ -99,11 +99,11 @@ public class SchoolRepository extends AbstractRepository {
         if(filcount>=2){
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters));
         }else if(filcount==1){
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
+            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, "凑数的字符"));
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.OR, filters));
         }else{
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
-            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, schoolProvince));
+            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, "凑数的字符"));
+            filters.add(new PropertyFilter(School.SCHOOL_PROVINCE, FilterOperator.EQUAL, "凑数的字符"));
             query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.OR, filters));
         }
 

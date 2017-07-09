@@ -125,11 +125,15 @@
 
     <div class="row-fluid">
 
-        <div class="span12">
-            <table class="table">
+        <div class="span12 table-responsive">
+            <table class="table table-bordered table-striped"
+                   data-toggle="table"
+                   data-height="460"
+                   data-pagination="true"
+                   data-search="true">
                 <thead>
                 <tr>
-                    <th>编号</th><th>学校名称</th><th>级别</th><th>所在省份</th>
+                    <th>编号</th><th data-sortable="true">学校名称</th><th data-sortable="true">办学层次</th><th data-sortable="true">学校类型</th><th data-sortable="true">级别</th><th data-sortable="true">所在省份</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -140,6 +144,8 @@
                         <tr>
                             <td>${x}</td>
                             <td><a rel="nofollow" href="${servePath}/info/college-detail">${schools.schoolName}</a></td>
+                            <td>${schools.schoolBatch}</td>
+                            <td>${schools.schoolType}</td>
                             <td>${schools.schoolLevel}</td>
                             <td>${schools.schoolProvince}</td>
                         </tr>
@@ -150,6 +156,8 @@
                         <tr>
                             <td>1</td>
                             <td><a rel="nofollow" href="${servePath}/info/college-detail">清华大学</a></td>
+                            <td>本科</td>
+                            <td>综合</td>
                             <td>985</td>
                             <td>北京</td>
                         </tr>
