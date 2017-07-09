@@ -1,20 +1,39 @@
 <#include "macro-info.ftl">
+<head>
+    <link rel="stylesheet" href="${staticServePath}/css/buttons.css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${staticServePath}/css/bootstrap-css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="${staticServePath}/css/bootstrap-select.min.css">
+    <script src="${staticServePath}/js/bootstrap-select.min.js"></script>
+    <script src="${staticServePath}/js/bootstrap-js"></script>
+    <script src="${staticServePath}/js/lib/jquery/jquery-3.1.0.min.js"></script>
+</head>
 <@info "score">
 
-<h2 class="sub-head">
-    <span></span> 分数线查询
-</h2>
+
+<p style="color: #1B9AF7;font-size: 34px">分数线查询</p>
+<hr>
+<div style="height: auto;width: 777px">
+    <div style="height:auto;">
+        <form action="${servePath}/info/score" method="POST" class="form-search">
+            <input placeholder="按校名查找" id="schoolname" name="schoolname" class="button button-border button-rounded button-primary" type="text" />
+        <#--button type="submit" class="btn" >查找</button-->
+            <button type="submit" class="button button-rounded button-primary"  >查找</button>
+        </form>
+    </div>
+</div>
+<hr>
+
 
 <div class="container-fluid">
-
-    <br>
-    <h4>批次查询<h4>
+    <p style="font-size: 20px">批次查询</p>
         <div class="row">
-            <form action="${servePath}/info/score" method="POST" class="form-search">
-            <div class="span4">
-                <div class="form-group col-lg-4">
-                    <label for="name">省份</label>
-                    <select id="studentProvince" name="studentProvince" class="form-control">
+        <form action="${servePath}/info/score" method="POST" class="form-search">
+             <div class="span2">
+                <div class="form-group col-lg-2">
+                
+                    <label for="name"></label>
+                    <select id="studentProvince" name="studentProvince" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;">
                         <option value ="">请选择学校所在省份</option>
                         <option value ="北京">北京市 </option>
                         <option value ="天津">天津市 </option>
@@ -53,35 +72,38 @@
                     </select>
                 </div>
             </div>
-            <div class="span4">
-                <div class="form-group col-lg-4">
-                    <label for="name">年份</label>
-                    <select id="year" name="year" class="form-control">
-                        <option value="">请选择年份</option>
-                        <option value="2016">2016</option>
-                        <option value="2015">2015</option>
-                        <option value="2014">2014</option>
-                        <option value="2013">2013</option>
-                    </select>
-                </div>
-            </div>
-            <div class="span4">
-                <div class="form-group col-lg-2">
-                    <label for="name"></label><br>
-                    <button type="submit" class="btn">查找</button>
-                </div>
-            </div>
+                <div class="span2">
+                        <div class="form-group col-lg-2">
+                        <label for="name"></label>
+                        <select id="year" name="year" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;">
+                            <option value="">请选择年份</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>                    
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                         </select> 
+                        </div>
+                 </div>   
+                 <div class="span2">
+                      <div class="form-group col-lg-2"style="padding-top: 5px">
+                           <button type="submit" class="button button-rounded button-primary-flat">查找</button>
+                       </div>
+                  </div>
             </form>
-        </div>
+        </div><--row-->
 
         <br>
-        <h4>某高校投档线查询<h4>
+    <p style="font-size: 20px">某高校投档线查询</p>
             <div class="row">
                 <form action="${servePath}/info/score" method="POST" class="form-search">
                 <div class="span2">
                     <div class="form-group col-lg-2">
                         <label for="name">学校所在省份</label>
-                        <select id="schoolProvince" name="schoolProvince" class="form-control">
+                        <select id="schoolProvince" name="schoolProvince" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;">
                             <option value ="">请选择学校所在省份</option>
                             <option value ="北京市">北京市 </option>
                             <option value ="天津市">天津市 </option>
@@ -117,14 +139,16 @@
                             <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
                             <option value ="香港特别行政区">香港特别行政区</option>
                             <option value ="澳门特别行政区">澳门特别行政区</option>
+
                         </select>
                     </div>
                 </div>
 
                 <div class="span2">
                     <div class="form-group col-lg-2">
+
                         <label for="name">学校名称</label>
-                        <select id="schoolName" name="schoolName" class="form-control">
+                        <select id="schoolName" name="schoolName" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" >
                             <option >请选择大学</option>
                             <option>北京大学</option>
                         </select>
@@ -133,8 +157,9 @@
 
                 <div class="span2">
                     <div class="form-group col-lg-2">
+
                         <label for="name">考生所在省份</label>
-                        <select id="studentProvince" name="studentProvince" class="form-control">
+                        <select id="studentProvince" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" name="studentProvince" class="form-control">
                             <option value ="">请选择省份</option>
                             <option value ="北京市">北京市 </option>
                             <option value ="天津市">天津市 </option>
@@ -170,14 +195,16 @@
                             <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
                             <option value ="香港特别行政区">香港特别行政区</option>
                             <option value ="澳门特别行政区">澳门特别行政区</option>
+
                         </select>
                     </div>
                 </div>
 
                 <div class="span2">
                     <div class="form-group col-lg-2">
+
                         <label for="name">文理科</label>
-                        <select id="artOrSci" name="artOrSci"class="form-control">
+                        <select id="artOrSci" name="artOrSci"class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;">
                             <option value="">请选择文理科</option>
                             <option value="文科">文科</option>
                             <option value="理科">理科</option>
@@ -188,7 +215,7 @@
                 <div class="span2">
                     <div class="form-group col-lg-2">
                         <label for="name">批次</label>
-                        <select id="batch" name="batch" class="form-control">
+                        <select id="batch" name="batch" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" class="form-control">
                             <option value="">请选择批次</option>
                             <option value="提前批">提前批</option>
                             <option value="本一批">本一批</option>
@@ -199,22 +226,20 @@
                 </div>
 
                 <div class="span2">
-                    <div class="form-group col-lg-2">
-                        <label for="name"></label><br>
-                        <button type="submit" class="btn">查找</button>
+                    <div class="form-group col-lg-2"style="padding-top: 5px">
+                        <button type="submit" class="button button-rounded button-primary-flat">查找</button>
                     </div>
                 </div>
             </form>
             </div>
             <br>
-
-            <h4>若干高校某年投档线查询<h4>
+    <p style="font-size: 20px">若干高校某年投档线查询</p>
                 <div class="row">
                 <form action="${servePath}/info/score" method="POST" class="form-search">
                     <div class="span2">
                         <div class="form-group col-lg-2">
                             <label for="name">学校所在省份</label>
-                            <select id="schoolProvince" name="schoolProvince" class="form-control">
+                            <select id="schoolProvince" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" name="schoolProvince" class="form-control">
                                 <option value ="">请选择省份</option>
                                 <option value ="北京">北京市 </option>
                                 <option value ="天津">天津市 </option>
@@ -258,7 +283,7 @@
                     <div class="span2">
                         <div class="form-group col-lg-2">
                             <label for="name">年份</label>
-                            <select id="year" name="year" class="form-control">
+                            <select id="year" name="year" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" class="form-control">
                                 <option value="">请选择年份</option>
                                 <option value="2016">2016</option>
                                 <option value="2015">2015</option>
@@ -270,8 +295,9 @@
 
                     <div class="span2">
                         <div class="form-group col-lg-2">
+
                             <label for="name">考生所在省份</label>
-                            <select id="studentProvince" name="studentProvince" class="form-control">
+                            <select id="studentProvince" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" name="studentProvince" class="form-control">
                                 <option value ="">请选择省份</option>
                                 <option value ="北京">北京市</option>
                                 <option value ="天津">天津市</option>
@@ -308,6 +334,7 @@
                                 <option value ="新疆维吾尔">新疆维吾尔自治区</option>
                                 <option value ="香港">香港特别行政区</option>
                                 <option value ="澳门">澳门特别行政区</option>
+
                             </select>
                         </div>
                     </div>
@@ -315,7 +342,7 @@
                     <div class="span2">
                         <div class="form-group col-lg-2">
                             <label for="name">文理科</label>
-                            <select id="artOrSci" name="artOrSci"class="form-control">
+                            <select id="artOrSci" name="artOrSci"class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;">
                                 <option value="">请选择文理科</option>
                                 <option value="文史">文科</option>
                                 <option value="理工">理科</option>
@@ -326,7 +353,7 @@
                     <div class="span2">
                         <div class="form-group col-lg-2">
                             <label for="name">批次</label>
-                            <select id="batch" name="batch" class="form-control">
+                            <select id="batch" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #1B9AF7;" name="batch" class="form-control">
                                 <option value="">请选择批次</option>
                                 <option value="提前批">提前批</option>
                                 <option value="一本">本一批</option>
@@ -337,9 +364,8 @@
                     </div>
 
                     <div class="span2">
-                        <div class="form-group col-lg-2">
-                            <label for="name"></label><br>
-                            <button type="submit" class="btn">查找</button>
+                        <div class="form-group col-lg-2"style="padding-top: 5px">
+                            <button type="submit" class="button button-rounded button-primary-flat">查找</button>
                         </div>
                     </div>
 

@@ -1,32 +1,33 @@
 <#include "macro-info.ftl">
+<head>
+    <link rel="stylesheet" href="${staticServePath}/css/buttons.css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${staticServePath}/css/bootstrap-css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="${staticServePath}/css/bootstrap-select.min.css">
+    <script src="${staticServePath}/js/bootstrap-select.min.js"></script>
+    <script src="${staticServePath}/js/bootstrap-js"></script>
+    <script src="${staticServePath}/js/lib/jquery/jquery-3.1.0.min.js"></script>
+</head>
 <@info "major">
-<h2 class="sub-head">
-    专业查询
-</h2>
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <h4>
-            按名称查询专业
-        </h4>
-        <div class="span12">
-            <form action="${servePath}/info/major" method="POST" class="form-search">
-                <input id="majorName" name="majorName" class="input-medium search-query" type="text" />
-                <button type="submit" class="btn">查找</button>
-            </form>
-        </div>
-    </div>
-
-
-    <div class="row-fluid">
-        <h4>
-            按条件查询专业
-        </h4>
+<p style="color: #A5DE37;font-size: 34px">专业查询</p>
+<hr>
+<div style="height: auto;width: 777px">
+    <div style="height:auto;">
         <form action="${servePath}/info/major" method="POST" class="form-search">
-            <div class="span5">
+            <input placeholder="按名称查询专业" id="majorName" name="majorName" class="button button-border button-rounded button-action" type="text" />
+        <#--button type="submit" class="btn" >查找</button-->
+            <button type="submit" class="button button-rounded button-action">查找</button>
+        </form>
+    </div>
+</div>
+<hr>
+<div>
+    <div class="row">
+        <form action="${servePath}/info/major" method="POST" class="form-search">
+            <div class="span2">
                 <div class="form-group col-lg-5">
                     <label for="name">学科门类</label>
-                    <select id="majorBtype" name="majorBtype" class="form-control">
+                    <select id="majorBtype" name="majorBtype" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #A5DE37;">
                         <option value=""></option>
                         <option value="哲学">哲学</option>
                         <option value="经济学">经济学</option>
@@ -44,10 +45,11 @@
                     </select>
                 </div>
             </div>
-            <div class="span5">
+
+            <div class="span2">
                 <div class="form-group col-lg-5">
                     <label for="name">专业类别</label>
-                    <select id="majorStype" name="majorStype"class="form-control">
+                    <select id="majorStype" name="majorStype"class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #A5DE37;">
                         <option value="">请选择专业类别</option>
                         <option value="哲学类">哲学类</option>
                         <option value="经济学类">经济学类</option>
@@ -148,14 +150,15 @@
                 </div>
             </div>
             <div class="span2">
-                <div class="form-group col-lg-2">
+
+                <div class="form-group col-lg-2" style="padding-top: 5px">
                     <label for="name"></label><br>
                     <button type="submit" class="btn">查找</button>
                 </div>
             </div>
         </form>
     </div>
-
+    <hr>
     <div class="row-fluid">
 
         <div class="span12">

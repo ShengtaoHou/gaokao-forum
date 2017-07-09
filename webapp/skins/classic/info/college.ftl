@@ -1,35 +1,34 @@
 <#include "macro-info.ftl">
+<head>
+    <link rel="stylesheet" href="${staticServePath}/css/buttons.css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${staticServePath}/css/bootstrap-css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="${staticServePath}/css/bootstrap-select.min.css">
+    <script src="${staticServePath}/js/bootstrap-select.min.js"></script>
+    <script src="${staticServePath}/js/bootstrap-js"></script>
+    <script src="${staticServePath}/js/lib/jquery/jquery-3.1.0.min.js"></script>
+</head>
 <@info "college">
 
-<h2 class="sub-head">
-    <span></span> 大学查询
-</h2>
-
-<div class="container-fluid">
-
-    <div class="row-fluid">
-
-
-        <h4>
-            按校名查询高校
-        </h4>
-        <div class="span12" id="testdiv">
-            <form action="${servePath}/info/college" method="POST" class="form-search">
-                <input id="schoolname" name="schoolname" class="input-medium search-query" type="text" />
-                <button type="submit" class="btn" >查找</button>
-
+<p style="color: #7B72E9;font-size: 34px">院校查询</p>
+<hr>
+<div style="height: auto;width: 777px">
+    <div style="height:auto;">
+        <form action="${servePath}/info/college" method="POST" class="form-search">
+            <input placeholder="按校名查找" id="schoolname" name="schoolname" class="button button-border button-rounded button-royal" type="text" />
+            <#--button type="submit" class="btn" >查找</button-->
+            <button type="submit" class="button button-rounded button-royal">查找</button>
             </form>
-
-        </div>
     </div>
-
-    <h4>按条件查询大学<h4>
+</div>
+<hr>
+<div>
         <div class="row">
             <form action="${servePath}/info/college" method="POST" class="form-search">
             <div class="span2">
                 <div class="form-group col-lg-2">
-                    <label for="name">层次</label>
-                    <select id="schoolBatch" name="schoolBatch" class="form-control">
+                    <label for="name"></label>
+                    <select id="schoolBatch" name="schoolBatch" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #7B72E9;">
                         <option value="">请选择层次</option>
                         <option value="本科">本科</option>
                         <option value="高职专科">高职专科</option>
@@ -38,8 +37,8 @@
             </div>
             <div class="span2">
                 <div class="form-group col-lg-2">
-                    <label for="name">级别</label>
-                    <select id="schoolLevel" name="schoolLevel"class="form-control">
+                    <label for="name"></label>
+                    <select id="schoolLevel" name="schoolLevel" class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #7B72E9;">
                         <option value="">请选择级别</option>
                         <option value="985">985</option>
                         <option value="211">211</option>
@@ -48,8 +47,8 @@
             </div>
             <div class="span2">
                 <div class="form-group col-lg-2">
-                    <label for="name">学校类型</label>
-                    <select id="schoolType" name="schoolType"class="form-control">
+                    <label for="name"></label>
+                    <select id="schoolType" name="schoolType"class="form-control" style="width:140px;height: 40px;line-height: 36px;border-width: 2px;border-color: #7B72E9;">
                         <option value="">请选择类型</option>
                         <option value="综合">综合</option>
                         <option value="理工">理工</option>
@@ -74,8 +73,8 @@
             </div>
             <div class="span2">
                 <div class="form-group col-lg-2">
-                    <label for="name">高校所在地</label>
-                    <select id="schoolProvince" name="schoolProvince" class="form-control">
+                    <label for="name"></label>
+                    <select id="schoolProvince" name="schoolProvince" class="form-control" style="width:140px;height: 40px; line-height: 36px;border-width: 2px;border-color: #7B72E9;">
                         <option value ="">请选择省份</option>
                         <option value ="北京">北京市 </option>
                         <option value ="天津">天津市 </option>
@@ -115,14 +114,13 @@
                 </div>
             </div>
             <div class="span2">
-                <div class="form-group col-lg-2">
-                    <label for="name"></label><br>
-                    <button type="submit" class="btn">查找</button>
+                <div class="form-group col-lg-2"style="padding-top: 5px">
+                    <button type="submit" class="button button-rounded button-royal">查找</button>
                 </div>
             </div>
             </form>
         </div>
-
+<hr>
     <div class="row-fluid">
 
         <div class="span12 table-responsive">
